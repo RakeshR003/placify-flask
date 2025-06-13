@@ -1,6 +1,6 @@
-﻿setuptools>=68.0.0
-wheel>=0.41.0
-numpy>=1.26.0  # Critical for Python 3.13
+setuptools==65.5.0
+wheel==0.38.4
+numpy==1.23.5  # Critical for Python 3.13
 attrs==25.3.0
 blinker==1.9.0
 blis==0.7.11
