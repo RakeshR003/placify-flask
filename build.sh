@@ -1,26 +1,29 @@
 #!/bin/bash
-set -e  # Exit immediately if any command fails
+set -e
 
 # Install system dependencies
 echo "Installing system dependencies..."
-sudo apt-get update -qq && sudo apt-get install -y \
+apt-get update -qq
+apt-get install -y \
     python3-dev \
     build-essential \
-    gfortran  # Needed for SciPy/NumPy
+    gfortran \
+    libopenblas-dev
 
 # Upgrade pip and setuptools
 echo "Upgrading pip and setuptools..."
 pip install --upgrade pip setuptools wheel
 
-# Install Python dependencies with preference for binary wheels
+# Install Python dependencies with specific versions and prefer binaries
 echo "Installing Python dependencies..."
 pip install \
     --no-cache-dir \
     --prefer-binary \
+    blis==0.7.9 \
+    spacy==3.5.0 \
     -r requirements.txt
 
-# Optional: Verify installations
-echo "Verifying critical packages..."
+echo "Verifying installations..."
 python -c "import blis; print('BLIS successfully imported')" || echo "BLIS import failed"
 python -c "import spacy; print('SpaCy successfully imported')" || echo "SpaCy import failed"
 
